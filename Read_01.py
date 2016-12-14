@@ -19,7 +19,7 @@ dates = [datetime.date.today() + datetime.timedelta(days=i) for i in range(-6, 1
 
 df = pd.DataFrame()
 for date in dates:
-    fileIn = inputDir + "/DATA4LSCE/GIF_" + date.strftime("%Y%m%d") + "_FIDAS_0109.0a"
+    fileIn = inputDir + "/GIF_" + date.strftime("%Y%m%d") + "_FIDAS_0109.0a"
     print "Reading ", fileIn
     df = df.append(pd.read_csv(fileIn, sep='\t'))
 
@@ -89,7 +89,9 @@ plt.ylabel(u'Concentration μg/m3')
 plt.grid(color='gray', axis='both', which='both')
 
 labels = ax.get_xmajorticklabels()
-plt.setp(labels, rotation=60, fontsize=10)
+plt.setp(labels, rotation=70, fontsize=10)
+labels = ax.get_xminorticklabels()
+plt.setp(labels, fontsize=8)
 
 startDate = int(np.floor(x[0])%2)
 for i in np.arange(startDate, len(dates), 2):
