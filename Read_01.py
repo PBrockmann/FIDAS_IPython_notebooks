@@ -3,6 +3,8 @@
 
 # Author: Patrick Brockmann for LSCE (UMR8212)
 
+# Usage: ./Read_01.py /dir1/dir2/DATA4LSCE image.png
+
 #======================================================
 import datetime
 import pandas as pd
