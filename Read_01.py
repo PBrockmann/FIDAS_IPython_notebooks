@@ -75,12 +75,12 @@ y = ax.get_ylim()
 #ax.set_ylim([0, y[1]])
 ax.set_ylim([0, 100])
 
-xplace = np.ceil(x[1]) - 0.1
+xplace = np.ceil(x[1])+0.1
 ax.axhline(y=80, color='red', linewidth=2, linestyle='dashed')
-ax.text(xplace, 83, "Seuil d'alerte PM10", bbox=dict(facecolor='red'), ha='right', fontsize=8)
+ax.text(xplace, 80, "Seuil d'alerte PM10", ha='left', fontsize=8, style='italic', bbox=dict(facecolor='red'))
 
 ax.axhline(y=50, color='orange', linewidth=2, linestyle='dashed')
-ax.text(xplace, 53, "Seuil d'information PM10", bbox=dict(facecolor='orange'), ha='right', fontsize=8)
+ax.text(xplace, 50, "Seuil d'information PM10", ha='left', fontsize=8, style='italic', bbox=dict(facecolor='orange'))
 
 plt.legend(loc=2, bbox_to_anchor=(1.0, 1.0))
 plt.title("LSCE FIDAS")
@@ -104,5 +104,6 @@ plt.show()
 
 plt.close()
 
+print outputFile, "created"
 
 #======================================================
