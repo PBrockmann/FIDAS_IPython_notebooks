@@ -21,7 +21,10 @@ df = pd.DataFrame()
 for date in dates:
     fileIn = inputDir + "/GIF_" + date.strftime("%Y%m%d") + "_FIDAS_0109.0a"
     print "Reading ", fileIn
-    df = df.append(pd.read_csv(fileIn, sep='\t'))
+    try:
+    	df = df.append(pd.read_csv(fileIn, sep='\t'))
+    except:
+	continue
 
 df = df.rename(columns=lambda x: x.strip())            # remove leading space
 
@@ -30,6 +33,8 @@ df['date'] = pd.to_datetime(df['date     time'], format='%Y-%m-%d %H:%M:%S')    
 df = df.set_index('date')
 df = df.sort_index()
 df = df.drop_duplicates()
+
+df_resampled = df.resample('1T').mean()
 
 #======================================================
 # Colors
@@ -59,7 +64,7 @@ fig, ax = plt.subplots(figsize=(10,6))
 
 #for i,var in enumerate(['PM-total', 'PM10', 'PM4', 'PM2.5', 'PM1']):
 for i,var in enumerate(['PM10', 'PM2.5']):
-    plt.plot(df.index, df[var], linewidth=1, label=var, color=colors[i])
+    plt.plot(df_resampled.index, df_resampled[var], linewidth=1, label=var, color=colors[i])
     
 #ax.xaxis.set_major_locator(HourLocator())
 ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d     '))
