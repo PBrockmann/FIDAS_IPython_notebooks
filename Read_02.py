@@ -30,6 +30,7 @@ df = df.rename(columns=lambda x: x.strip())            # remove leading space
 
 df['date'] = pd.to_datetime(df['date     time'], format='%Y-%m-%d %H:%M:%S')    # first column is 'date time'
 
+
 df = df.set_index('date')
 df = df.sort_index()
 df = df.drop_duplicates()
@@ -63,7 +64,7 @@ fig, ax = plt.subplots(figsize=(10,6))
 
 #for i,var in enumerate(['PM-total', 'PM10', 'PM4', 'PM2.5', 'PM1']):
 for i,var in enumerate(['PM10', 'PM2.5']):
-    plt.plot(df_resampled.index, df_resampled[var], linewidth=1, label=var, color=colors[i])
+    plt.plot(df_resampled.index.to_pydatetime(), df_resampled[var], linewidth=1, label=var, color=colors[i])
     
 #ax.xaxis.set_major_locator(HourLocator())
 ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d     '))
@@ -79,6 +80,8 @@ y = ax.get_ylim()
 #ax.set_ylim([0, y[1]])
 ax.set_ylim([0, 100])
 
+ax.tick_params(axis='x', direction='in', top='on', which='both')
+
 xplace = np.ceil(x[1])+0.1
 ax.axhline(y=80, color='red', linewidth=2, linestyle='dashed')
 ax.text(xplace, 80, "Seuil d'alerte PM10", ha='left', fontsize=8, style='italic', bbox=dict(facecolor='red'))
@@ -86,11 +89,11 @@ ax.text(xplace, 80, "Seuil d'alerte PM10", ha='left', fontsize=8, style='italic'
 ax.axhline(y=50, color='orange', linewidth=2, linestyle='dashed')
 ax.text(xplace, 50, "Seuil d'information PM10", ha='left', fontsize=8, style='italic', bbox=dict(facecolor='orange'))
 
-plt.legend(loc=2, bbox_to_anchor=(1.0, 1.0))
+plt.legend(loc=2, bbox_to_anchor=(1.0, 1.0), edgecolor='black', borderpad=0.8)
 plt.title("LSCE FIDAS")
 #plt.xlabel('Time')
 plt.ylabel(u'Concentration μg/m3')
-plt.grid(color='gray', axis='both', which='both')
+plt.grid(color='gray', axis='both', which='both', linestyle='dotted')
 
 labels = ax.get_xmajorticklabels()
 plt.setp(labels, rotation=70, fontsize=10)
