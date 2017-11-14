@@ -15,8 +15,8 @@ outputFile = sys.argv[2]
 
 #======================================================
 # Read files as DataFrame
-dates = [datetime.date.today() + datetime.timedelta(days=i) for i in range(-6, 1, 1)]
-# print dates[0], dates[-1]
+dates = [datetime.date.today() + datetime.timedelta(days=i) for i in range(-6, 2, 1)]
+print dates[0], dates[-1]
 
 df = pd.DataFrame()
 for date in dates:
