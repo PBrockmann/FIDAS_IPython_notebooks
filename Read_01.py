@@ -84,7 +84,7 @@ ax.set_ylim([0, 100])
 
 ax.tick_params(axis='x', direction='in', top='on', which='both')
 
-xplace = np.ceil(x[1])+0.1
+xplace = matplotlib.dates.date2num(dates[-1])+0.1
 ax.axhline(y=80, color='red', linewidth=2, linestyle='dashed')
 ax.text(xplace, 80, "Seuil d'alerte PM10", ha='left', fontsize=8, style='italic', bbox=dict(facecolor='red'))
 
